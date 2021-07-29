@@ -16,6 +16,37 @@ Space Complexity: O(1)
 class Solution {
 public:
     int findCelebrity(int n) {
+        int indegress[n];
+        int outdegres[n];
+        for ( int i = 0; i < n; i++){
+            indegress[i] = 0;
+            outdegres[i] = 0;
+        }
+        for ( int i =0; i < n ; i++){
+            for ( int j =0; j< n ; j++){
+                if( i != j){
+                    if ( knows(i, j)){
+                        indegress[j] += 1;
+                        outdegres[i] += 1;
+                    }
+                }
+                
+            }        
+        }
+        
+        for ( int i =0; i < n ; i++){
+            if ( indegress[i] == n-1 and outdegres[i]== 0 ) return i;
+        }
+        return -1;
+    }
+};
+//////////////////////////////
+
+
+
+class Solution {
+public:
+    int findCelebrity(int n) {
         int potentialCeleb = 0;
         for (int i = 1; i < n; i++){
             if ( knows(potentialCeleb, i)){
